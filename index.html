@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+    <!-- CHANGE FONT SIZES SETTINGS -->
+    <style>
+
+         /* 1. Use a more-intuitive box-sizing model */
+         *, *::before, *::after {
+        box-sizing: border-box;
+        }
+        /* 2. Remove default margin */
+        * {
+        margin: 0;
+        }
+        body {
+        /* 3. Add accessible line-height */
+        line-height: 1.5;
+        /* 4. Improve text rendering */
+        -webkit-font-smoothing: antialiased;
+        }
+        /* 5. Improve media defaults */
+        img, picture, video, canvas, svg {
+        display: block;
+        max-width: 100%;
+        }
+        /* 6. Inherit fonts for form controls */
+        input, button, textarea, select {
+        font: inherit;
+        }
+        /* 7. Avoid text overflows */
+        p, h1, h2, h3, h4, h5, h6 {
+        overflow-wrap: break-word;
+        }
+        /* 8. Improve line wrapping */
+        p {
+        text-wrap: pretty;
+        }
+        h1, h2, h3, h4, h5, h6 {
+        text-wrap: balance;
+        }
+        /*
+        9. Create a root stacking context
+        */
+        #root, #__next {
+        isolation: isolate;
+        }
+
+        :root {
+            --dark-gray: #454444; /* Объявление переменной для темно-серого цвета */
+        }
+
+        body {
+            font-family: "Segoe UI", system-ui, Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+
+        .container{
+            display: grid;
+            grid-template: 1fr 5fr / 1fr 5fr
+        }
+
+        .sidebar{
+            grid-row: 1/3;
+            display: grid;
+            grid-template-rows: 50px 230px 50px;
+            grid-auto-flow: column;
+            /* align-items: flex-start; */
+            justify-items: start;
+            gap: 50px;
+
+            min-width: 240px;
+            
+            padding-top: 25px;
+            background-color: rgb(25, 146, 212);
+            color: white;
+            font-weight: 600;
+
+        }
+        
+        ul{
+            list-style-type: none;
+        }
+
+        .menu.logo ul{
+            font-size: 25px;
+            display: flex;
+            align-items: center;
+            /* gap: 20px; */
+        }
+
+        .menu ul{
+            display: flex;
+            flex-direction: column;
+            font-size: 20px;
+            gap: 10px;
+        }
+
+        .menu li{
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header{
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            padding: 0 60px 20px 35px;
+            box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            gap: 20px;
+        }
+
+        .first-row{
+            display: flex;
+            flex: 1 1 100%;
+            align-items: center;
+            justify-content: space-between;
+            /* gap: 15px; */
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .first-row ul{
+            display: flex;
+            align-items: center;
+            gap: 30px
+
+        }
+
+        .search{
+            display: flex;
+            align-items: center;
+        }
+
+    
+        input{
+            width: 700px;
+            border: none;
+            border-radius: 25px;
+            height: 35px;
+            background-color: rgb(229, 232, 234);
+            padding: 10px;
+            margin: 0px 0px 0px 15px;
+            font-weight: 400;
+            font-size: 16px;
+            
+        }
+
+        
+        input:focus {
+            border: none; 
+            outline: none; 
+            
+        }
+
+
+        .profile-image{
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 30px;
+        }
+
+        .second-row{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .second-row ul{
+            display: flex;
+            gap: 35px
+        }
+
+        #greeting{
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #greeting .profile-image{
+            width: 75px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 60px;
+            /* margin-right: 25px; */
+            margin-left: 0;
+
+        }
+
+        #greeting span{
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .main{
+            display: grid;
+            background-color: aliceblue;
+            grid-template-columns: 3fr 1fr;
+            padding: 35px 30px;
+        }
+
+        .main-right{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 10px 5fr 5fr 5fr;
+            gap: 35px;
+        }
+
+        .header-of-card{
+            grid-column: 1 / -1;
+            margin-bottom: -40px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .main-left{
+            padding-left: 25px;
+            gap: 35px;
+            display: grid;
+            grid-template-rows: 10px 5fr 10px 5fr;
+        }
+
+        .card{
+            /* display: flex; */
+            background-color: white;
+            padding: 30px;
+            display: grid;
+            grid-template-rows: 1fr 5fr 3fr;
+
+            justify-content: center;
+            align-items: center;
+            border-left: 10px solid orange; 
+            border-radius: 10px;
+            box-shadow: 2px 4px 5px 0 rgba(0, 0, 0, 0.1);
+            
+
+        }
+
+        .card p{
+            color: var(--dark-gray);
+        }
+
+        .card span{
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+        }
+
+        .special-card{
+            background-color: white;
+            padding: 30px;
+            display: grid;
+            
+            justify-content: flex-start;
+            align-items:flex-start;
+            border-radius: 10px;
+            box-shadow: 2px 4px 5px 0 rgba(0, 0, 0, 0.1);
+
+
+        }
+
+        .contact .profile-image{
+            height: 52px;
+            width: 52px;
+        }
+
+        .special-card p{
+            /* white-space: nowrap;  */
+            overflow: hidden; 
+            /* text-overflow: ellipsis;  */
+
+            display: -webkit-box; /* Используется для поддержки многолинейного обрезания */
+            -webkit-box-orient: vertical; /* Вертикальная ориентация для блоков */
+            -webkit-line-clamp: 4; /* Количество строк перед обрезкой */
+            line-height: 1.5; /* Регулирует высоту строки */
+            max-height: calc(1.5em * 4); /* Общая высота для видимости трех строк */
+
+            font-size: 14px;
+            color: var(--dark-gray);
+
+
+            
+
+        }
+
+        .divider {
+            width: 200px; 
+            border-top: 1px solid #ddd; 
+        }
+
+        .contact{
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .contact p{
+            color: var(--dark-gray);
+            font-size: 16px;
+        }
+
+        .icon-side.dashboard{
+            width: 40px;
+            height: 40px;
+            margin-left: -10px;
+        }
+
+        .icon-side{
+            width: 20px;
+            height: 20px;
+            filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(356deg) brightness(119%) contrast(121%);
+        }
+
+        .icon{
+            width: 25px;
+            height: 25px;
+        }
+
+        .icon.bell{
+            width: 30px;
+            height: 30px;
+        }
+
+        .button{
+            border: none;
+            border-radius: 20px;
+            background-color: rgb(25, 146, 212);
+            width: 90px;
+            height: 40px;
+            padding: 10px;
+            color: white;
+            
+            display: flex;            
+            justify-content: center;  
+            align-items: center;
+            
+        }
+
+        button:active {
+            transform: scale(0.95);  
+            background-color: #2980b9; 
+        }
+
+        #svg-container {
+            cursor: pointer;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="menu logo"> 
+                <ul>
+                    <li> <img class="icon-side dashboard" src="pictures/view-dashboard-outline.svg" alt="Description of the SVG"> Dashboard</li>
+                </ul></div>
+            <div class="menu">
+                <ul>
+                    <li> <img class="icon-side " src="pictures/home-variant.svg" alt="Description of the SVG"> Home</li>
+                    <li> <img class="icon-side " src="pictures/card-account-details-outline.svg" alt="Description of the SVG">Profile</li>
+                    <li> <img class="icon-side" src="pictures/message-reply-text.svg" alt="Description of the SVG">Messages</li>
+                    <li> <img class="icon-side" src="pictures/clock-time-three.svg" alt="Description of the SVG">History</li>
+                    <li> <img class="icon-side" src="pictures/file-multiple.svg" alt="Description of the SVG">Tasks</li>
+                    <li> <img class="icon-side" src="pictures/account-group.svg" alt="Description of the SVG">Communities</li>
+
+                </ul>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li> <img class="icon-side" src="pictures/cog.svg" alt="Description of the SVG">Settings</li>
+                    <li> <img class="icon-side" src="pictures/help.svg" alt="Description of the SVG">Support</li>
+                    <li> <img class="icon-side" src="pictures/shield-account.svg" alt="Description of the SVG">Privacy</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="header">
+            <div class="first-row">
+                <div class="search">
+                    <img class="icon" src="pictures/magnify.svg" alt="Description of the SVG"> <input type="text" placeholder="Search...">
+                </div> 
+                <ul>
+                    <li><img class="icon bell" src="pictures/bell.svg" alt="Icon of notification"> </li>
+                    <li><img class="profile-image" src="pictures/J6UQtWn5nlY.jpg" alt="Icon of your profile"> </li>
+                    <li> Your Account </li>
+                </ul>
+            </div>
+                <div class="second-row">
+                    <div id="greeting">
+                        <img class="profile-image" src="pictures/J6UQtWn5nlY.jpg" alt="Icon of your profile"> 
+                        <p> Hi there, <br><span id="browser-name">User</span></p>
+                    </div>
+                    <div>
+                        <ul>
+                            <button class="button"><li>New</li></button>
+                            <button class="button"><li>Upload</li></button>
+                            <button class="button"><li>Share</li></button>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+
+        <div class="main">
+            <div class="main-right">
+                <div class="header-of-card"> Your projects </div>
+                <div class="card"> 
+                    <b>Project one</b>  
+                    <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam beatae a consequuntur iusto veniam, laboriosam maiores fugiat dicta quo eius blanditiis quasi numquam quibusdam debitis ratione iure corporis nobis magnam?</p> 
+                    <span> 
+                        <img class="icon" src="pictures/eye-plus-outline.svg" alt="Description of the SVG">
+                        <div class="svg-container" onclick="swapSVG(this)">
+                            <img class="icon" id="svg1" src="pictures/star-plus-outline.svg" alt="SVG 1">
+                            <img class="icon" id="svg2" src="pictures/star-check-outline.svg" alt="SVG 2" style="display: none;">
+                        </div>
+                        <img class="icon" src="pictures/source-fork.svg" alt="Description of the SVG"> 
+                    </span>
+                </div>
+                <div class="card"> 
+                    <b>Some another</b>  
+                    <p>  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam beatae a consequuntur iusto veniam, laboriosam maiores fugiat dicta quo eius blanditiis quasi numquam quibusdam debitis ratione iure corporis nobis magnam?</p>
+                    <span> 
+                        <img class="icon" src="pictures/eye-plus-outline.svg" alt="Description of the SVG">
+                        <div class="svg-container" onclick="swapSVG(this)">
+                            <img class="icon" id="svg1" src="pictures/star-plus-outline.svg" alt="SVG 1">
+                            <img class="icon" id="svg2" src="pictures/star-check-outline.svg" alt="SVG 2" style="display: none;">
+                        </div>
+                        <img class="icon" src="pictures/source-fork.svg" alt="Description of the SVG"> 
+                    </span>
+                </div>
+                <div class="card"> 
+                    <b>Route 66</b>  
+                    <p>  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam beatae a consequuntur iusto veniam, laboriosam maiores fugiat dicta quo eius blanditiis quasi numquam quibusdam debitis ratione iure corporis nobis magnam?</p>
+                    <span> 
+                        <img class="icon" src="pictures/eye-plus-outline.svg" alt="Description of the SVG">
+                        <div class="svg-container" onclick="swapSVG(this)">
+                            <img class="icon" id="svg1" src="pictures/star-plus-outline.svg" alt="SVG 1">
+                            <img class="icon" id="svg2" src="pictures/star-check-outline.svg" alt="SVG 2" style="display: none;">
+                        </div>
+                        <img class="icon" src="pictures/source-fork.svg" alt="Description of the SVG"> 
+                    </span>
+                </div>                
+                <div class="card"> 
+                    <b>Some another</b>  
+                    <p>  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam beatae a consequuntur iusto veniam, laboriosam maiores fugiat dicta quo eius blanditiis quasi numquam quibusdam debitis ratione iure corporis nobis magnam?</p>
+                    <span> 
+                        <img class="icon" src="pictures/eye-plus-outline.svg" alt="Description of the SVG">
+                        <div class="svg-container" onclick="swapSVG(this)">
+                            <img class="icon" id="svg1" src="pictures/star-plus-outline.svg" alt="SVG 1">
+                            <img class="icon" id="svg2" src="pictures/star-check-outline.svg" alt="SVG 2" style="display: none;">
+                        </div>
+                        <img class="icon" src="pictures/source-fork.svg" alt="Description of the SVG"> 
+                    </span>
+                </div>                
+                <div class="card"> 
+                    <b>Just card...</b>  
+                    <p>  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam beatae a consequuntur iusto veniam, laboriosam maiores fugiat dicta quo eius blanditiis quasi numquam quibusdam debitis ratione iure corporis nobis magnam?</p>
+                    <span> 
+                        <img class="icon" src="pictures/eye-plus-outline.svg" alt="Description of the SVG">
+                        <div class="svg-container" onclick="swapSVG(this)">
+                            <img class="icon" id="svg1" src="pictures/star-plus-outline.svg" alt="SVG 1">
+                            <img class="icon" id="svg2" src="pictures/star-check-outline.svg" alt="SVG 2" style="display: none;">
+                        </div>
+                        <img class="icon" src="pictures/source-fork.svg" alt="Description of the SVG"> 
+                    </span>
+                </div>                
+                <div class="card"> 
+                    <b>Yappy</b>  
+                    <p>  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam beatae a consequuntur iusto veniam, laboriosam maiores fugiat dicta quo eius blanditiis quasi numquam quibusdam debitis ratione iure corporis nobis magnam?</p>
+                    <span> 
+                        <img class="icon" src="pictures/eye-plus-outline.svg" alt="Description of the SVG">
+                        <div class="svg-container" onclick="swapSVG(this)">
+                            <img class="icon" id="svg1" src="pictures/star-plus-outline.svg" alt="SVG 1">
+                            <img class="icon" id="svg2" src="pictures/star-check-outline.svg" alt="SVG 2" style="display: none;">
+                        </div>
+                                                <img class="icon" src="pictures/source-fork.svg" alt="Description of the SVG"> 
+                    </span>
+                </div>            </div>
+            <div class="main-left">
+                <div class="header-of-card"> Announcement </div>
+                <div class="special-card"> 
+                    <p> <b>Site Maintenance</b> <br> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus illum dolores minus fugiat ea. Assumenda illum asperiores, corporis harum, debitis sapiente, sit eligendi laboriosam repudiandae ullam dignissimos ipsum voluptatem exercitationem.</p>
+                    <div class="divider"></div> 
+                    <p> <b>Anniversary of M. Drake</b> <br> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus illum dolores minus fugiat ea. Assumenda illum asperiores, corporis harum, debitis sapiente, sit eligendi laboriosam repudiandae ullam dignissimos ipsum voluptatem exercitationem.</p>
+                    <div class="divider"></div> 
+                    <p> <b>Rolling Stones performance</b> <br> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus illum dolores minus fugiat ea. Assumenda illum asperiores, corporis harum, debitis sapiente, sit eligendi laboriosam repudiandae ullam dignissimos ipsum voluptatem exercitationem.</p>
+                </div>
+                <div class="header-of-card"> Trending </div>
+                <div class="special-card"> 
+                    <div class="contact">
+                        <img class="profile-image" src="pictures/ikari.webp" alt="Icon of your profile"> 
+                        <span> @john <br><p>Some hippie</p></span>
+                    </div>
+                    <div class="contact">
+                        <img class="profile-image" src="pictures/misato.jpg" alt="Icon of your profile"> 
+                        <span> @paul <br><p>Wrote yesterday</p></span>
+                    </div>                    
+                    <div class="contact">
+                        <img class="profile-image" src="pictures/gegel.jpg" alt="Icon of your profile"> 
+                        <span> @mick <br><p>Looks like a girl</p></span>
+                    </div>    
+                    <div class="contact">
+                        <img class="profile-image" src="pictures/rizuco.jpg" alt="Icon of your profile"> 
+                        <span> @keith <br><p>Latest bass guitarist</p></span>
+                    </div>              
+                </div>
+            </div>            
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+const userAgent = navigator.userAgent;
+const browserNameElement = document.getElementById('browser-name');
+
+// Персонализированное приветствие в зависимости от браузера
+if (userAgent.includes("Chrome") && !userAgent.includes("Edg")) {
+    browserNameElement.textContent = "Chrome user";
+} else if (userAgent.includes("Firefox")) {
+    browserNameElement.textContent = "Firefox user";
+} else if (userAgent.includes("Safari") && !userAgent.includes("Chrome")) {
+    browserNameElement.textContent = "Safari user";
+} else if (userAgent.includes("Edge")) {
+    browserNameElement.textContent = "Edge user";
+} else if (userAgent.includes("Opera") || userAgent.includes("OPR")) {
+    browserNameElement.textContent = "Opera user";
+} else if (userAgent.includes("Arc")) {
+    browserNameElement.textContent = "Arc user";
+} else {
+    browserNameElement.textContent = "User";
+}
+
+function swapSVG(container) {
+    const svg1 = container.querySelector('#svg1');
+    const svg2 = container.querySelector('#svg2');
+
+    if (svg1.style.display === 'none') {
+        svg1.style.display = 'block';
+        svg2.style.display = 'none';
+    } else {
+        svg1.style.display = 'none';
+        svg2.style.display = 'block';
+    }
+}
+
+</script>
