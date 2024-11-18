@@ -521,17 +521,19 @@ const userAgent = navigator.userAgent;
 const browserNameElement = document.getElementById('browser-name');
 
 // Персонализированное приветствие в зависимости от браузера
-if (userAgent.includes("Chrome") && !userAgent.includes("Edg")) {
+if (userAgent.includes("Chrome") && !userAgent.includes("Edg") && !userAgent.includes("Ya") && !userAgent.includes("Gecko")) {
     browserNameElement.textContent = "Chrome user";
 } else if (userAgent.includes("Firefox")) {
     browserNameElement.textContent = "Firefox user";
 } else if (userAgent.includes("Safari") && !userAgent.includes("Chrome")) {
     browserNameElement.textContent = "Safari user";
-} else if (userAgent.includes("Edge")) {
+} else if (userAgent.includes("Edg")) {
     browserNameElement.textContent = "Edge user";
+} else if (userAgent.includes("Ya")) {
+    browserNameElement.textContent = "Yandex user";
 } else if (userAgent.includes("Opera") || userAgent.includes("OPR")) {
     browserNameElement.textContent = "Opera user";
-} else if (userAgent.includes("Arc")) {
+} else if (userAgent.includes("Gecko")) {
     browserNameElement.textContent = "Arc user";
 } else {
     browserNameElement.textContent = "User";
