@@ -117,7 +117,6 @@
 
         .first-row{
             display: flex;
-            flex: 1 1 100%;
             align-items: center;
             justify-content: space-between;
             /* gap: 15px; */
@@ -125,21 +124,20 @@
             font-size: 18px;
         }
 
-        .first-row ul{
-            display: flex;
-            align-items: center;
-            gap: 30px
 
-        }
 
         .search{
             display: flex;
+            flex-grow: 1;
             align-items: center;
+            margin-right: 7rem;
         }
 
     
-        input{
-            width: 700px;
+        input {
+            display: flex;
+            flex: 1;
+            width: 100%;
             border: none;
             border-radius: 25px;
             height: 35px;
@@ -148,7 +146,6 @@
             margin: 0px 0px 0px 15px;
             font-weight: 400;
             font-size: 16px;
-            
         }
 
         
@@ -164,6 +161,16 @@
             height: 45px;
             object-fit: cover;
             border-radius: 30px;
+        }
+
+        .profile-part{
+            /* box-sizing: border-box; */
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding  : 0 0px 0 45px;
+            /* margin: 10px; */
+
         }
 
         .second-row{
@@ -386,11 +393,11 @@
                 <div class="search">
                     <img class="icon" src="pictures/magnify.svg" alt="Description of the SVG"> <input type="text" placeholder="Search...">
                 </div> 
-                <ul>
-                    <li><img class="icon bell" src="pictures/bell.svg" alt="Icon of notification"> </li>
-                    <li><img class="profile-image" src="pictures/J6UQtWn5nlY.jpg" alt="Icon of your profile"> </li>
-                    <li> Your Account </li>
-                </ul>
+                <div class="profile-part"> 
+                    <img class="icon bell" src="pictures/bell.svg" alt="Icon of notification">
+                    <img class="profile-image" src="pictures/J6UQtWn5nlY.jpg" alt="Icon of your profile"> 
+                    <p> Your Account </p>
+                </div> 
             </div>
                 <div class="second-row">
                     <div id="greeting">
@@ -521,7 +528,7 @@ const userAgent = navigator.userAgent;
 const browserNameElement = document.getElementById('browser-name');
 
 // Персонализированное приветствие в зависимости от браузера
-if (userAgent.includes("Chrome") && !userAgent.includes("Edg") && !userAgent.includes("Ya") && !userAgent.includes("Gecko")) {
+if (userAgent.includes("Chrome") && !userAgent.includes("Edg") && !userAgent.includes("Ya")) {
     browserNameElement.textContent = "Chrome user";
 } else if (userAgent.includes("Firefox")) {
     browserNameElement.textContent = "Firefox user";
@@ -533,8 +540,7 @@ if (userAgent.includes("Chrome") && !userAgent.includes("Edg") && !userAgent.inc
     browserNameElement.textContent = "Yandex user";
 } else if (userAgent.includes("Opera") || userAgent.includes("OPR")) {
     browserNameElement.textContent = "Opera user";
-} else if (userAgent.includes("Gecko")) {
-    browserNameElement.textContent = "Arc user";
+
 } else {
     browserNameElement.textContent = "User";
 }
